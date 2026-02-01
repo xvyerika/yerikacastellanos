@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XV Yerika - Golden Luxury</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500&family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* PALETA GOLDEN CHAMPAGNE */
+            --fondo-champagne: #fdf6e3;
+            --dorado-principal: #cda45e;
+            --dorado-oscuro: #9e7e45;
+            --texto-contraste: #4a3b2a;
+            --blanco-crema: #fffaf0;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: radial-gradient(circle, var(--fondo-champagne) 0%, #eaddca 100%);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-size: 18px;
+        }
+
+        /* Partículas */
+        body::before {
+             content: ''; position: absolute; width: 100%; height: 100%;
+             background-image: radial-gradient(var(--dorado-principal) 2px, transparent 2px);
+             background-size: 45px 45px; opacity: 0.3; z-index: 0;
+             animation: twinkling 8s infinite alternate;
+        }
+        @keyframes twinkling { from { opacity: 0.2; transform: scale(1); } to { opacity: 0.5; transform: scale(1.1); } }
+
+        .main-card {
+            background: linear-gradient(180deg, #fffbf2 0%, var(--fondo-champagne) 100%);
+            width: 90%; max-width: 420px;
+            padding: 50px 30px;
+            border-radius: 35px;
+            border: 3px double var(--dorado-principal);
+            box-shadow: 0 25px 60px rgba(158, 126, 69, 0.4), inset 0 0 40px rgba(205, 164, 94, 0.1);
+            text-align: center;
+            color: var(--texto-contraste);
+            position: relative;
+            z-index: 10;
+            padding-bottom: 100px;
+        }
+
+        /* Decoraciones de esquinas */
+        .corner-decoration {
+            position: absolute; width: 60px; height: 60px;
+            border: 2px solid var(--dorado-principal); opacity: 0.6;
+        }
+        .top-left { top: 15px; left: 15px; border-right: none; border-bottom: none; border-radius: 15px 0 0 0; }
+        .top-right { top: 15px; right: 15px; border-left: none; border-bottom: none; border-radius: 0 15px 0 0; }
+        .bottom-left { bottom: 15px; left: 15px; border-right: none; border-top: none; border-radius: 0 0 0 15px; }
+        .bottom-right { bottom: 15px; right: 15px; border-left: none; border-top: none; border-radius: 0 0 15px 0; }
+
+        /* Animaciones */
+        .fade-in { opacity: 0; animation: fadeIn 1s ease-out forwards; }
+        .delay-1 { animation-delay: 0.3s; }
+        .delay-2 { animation-delay: 0.6s; }
+        .delay-3 { animation-delay: 0.9s; }
+        .delay-4 { animation-delay: 1.2s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .brand-title {
+            font-family: 'Cinzel', serif; font-weight: 700; letter-spacing: 5px;
+            color: var(--dorado-oscuro); font-size: 0.8rem; margin-bottom: 30px; text-transform: uppercase;
+        }
+        
+        /* ESTILO DEL CAMPO PARA LA FOTO (Mantenido intacto) */
+        .profile-frame {
+            width: 200px; height: 200px; margin: 0 auto 25px; border-radius: 50%;
+            border: 4px double var(--dorado-principal); padding: 5px;
+            background: #fff;
+            box-shadow: 0 10px 25px rgba(205, 164, 94, 0.3);
+            animation: float 6s ease-in-out infinite;
+            overflow: hidden; /* Asegura que la imagen no se salga del círculo */
+        }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        
+        /* Ajuste de imagen para que siempre llene el círculo */
+        .profile-frame img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; object-position: center center; }
+
+        h1 {
+            font-family: 'Great Vibes', cursive; font-size: 6rem;
+            color: var(--dorado-principal);
+            background: linear-gradient(to right, var(--dorado-principal), #d4af37, var(--dorado-principal));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin: 0; line-height: 1;
+            filter: drop-shadow(0 2px 2px rgba(158, 126, 69, 0.2));
+        }
+        .sub-xv { font-family: 'Cinzel', serif; font-weight: 700; color: var(--dorado-oscuro); letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-top: 10px; }
+        .tagline { font-family: 'Great Vibes', cursive; font-size: 2.2rem; color: var(--dorado-principal); margin-top: 5px; margin-bottom: 40px; }
+
+        .section-header {
+            font-family: 'Cinzel', serif; font-weight: 700; letter-spacing: 3px; color: var(--dorado-oscuro);
+            font-size: 1.1rem; text-transform: uppercase; margin: 35px 0 20px; display: block;
+            border-bottom: 1px solid rgba(205, 164, 94, 0.3); display: inline-block; padding-bottom: 5px;
+        }
+
+        .info-grid {
+            display: flex; justify-content: space-between; margin-bottom: 30px;
+            text-align: left; padding: 10px 0;
+        }
+        .info-text { font-size: 1.1rem; line-height: 1.4; color: var(--texto-contraste); font-weight: 500; }
+        .highlight-gold { color: var(--dorado-oscuro); font-weight: 700; font-family: 'Cinzel', serif; font-size: 0.95rem; }
+
+        .countdown-box {
+            background: rgba(205, 164, 94, 0.05); border: 1px solid var(--dorado-principal);
+            border-radius: 15px; padding: 20px; display: flex; justify-content: space-around; margin: 20px 0;
+        }
+        .timer-unit .num { display: block; font-size: 2.2rem; color: var(--dorado-principal); font-weight: 600; line-height: 1; margin-bottom: 5px; font-family: 'Cinzel', serif; }
+        .timer-unit .lab { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--dorado-oscuro); }
+
+        .separator-h {
+            display: flex; align-items: center; justify-content: center; margin: 30px 0; color: var(--dorado-principal);
+        }
+        .separator-h::before, .separator-h::after { content: ''; height: 1px; background: var(--dorado-principal); flex: 1; opacity: 0.5; }
+        .separator-h span { padding: 0 15px; font-family: 'Cinzel', serif; font-size: 1.2rem; }
+
+        .digital-ticket {
+            border: 2px solid var(--dorado-principal); background: var(--blanco-crema);
+            padding: 25px; margin: 40px 0; position: relative; border-radius: 10px;
+            outline: 1px solid var(--dorado-principal); outline-offset: -6px;
+        }
+        .guest-counter { font-size: 2rem; color: var(--dorado-principal); font-weight: 600; margin: 15px 0; font-family: 'Cinzel', serif; }
+
+        .btn-wa-gold {
+            display: block; width: 100%; padding: 18px; border-radius: 50px; margin-top: 40px;
+            text-decoration: none; font-size: 0.9rem; font-weight: 700; font-family: 'Cinzel', serif;
+            text-transform: uppercase; letter-spacing: 2px; text-align: center;
+            background: linear-gradient(to right, var(--dorado-principal), #ffe6b3, var(--dorado-principal));
+            background-size: 200%; color: #4a3b2a; border: 2px solid #fff;
+            animation: goldShine 3s infinite;
+            box-shadow: 0 10px 25px rgba(205, 164, 94, 0.4); transition: transform 0.3s;
+        }
+        @keyframes goldShine {
+            0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; transform: scale(1.02); } 100% { background-position: 0% 50%; }
+        }
+        .btn-wa-gold:active { transform: scale(0.95); }
+
+        .qr-code { margin-top: 40px; border: 3px double var(--dorado-principal); padding: 8px; display: inline-block; background: white; border-radius: 10px; }
+        .qr-code img { width: 100px; height: 100px; display: block; }
+
+        .music-fab {
+            position: fixed; bottom: 25px; right: 25px; width: 60px; height: 60px;
+            background: var(--dorado-principal); border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 5px 20px rgba(158, 126, 69, 0.5); z-index: 1000; cursor: pointer; border: 3px solid #fff; color: var(--blanco-crema);
+        }
+        .spin-anim { animation: spin 4s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+    </style>
+</head>
+<body>
+
+    <div class="main-card">
+        <div class="corner-decoration top-left"></div>
+        <div class="corner-decoration top-right"></div>
+        <div class="corner-decoration bottom-left"></div>
+        <div class="corner-decoration bottom-right"></div>
+
+        <div class="brand-title fade-in">INVITACIÓN REAL</div>
+        
+        <div class="profile-frame fade-in delay-1">
+            <img src="https://via.placeholder.com/400x400/fdf6e3/cda45e?text=TU+FOTO+AQUÍ" alt="Espacio para foto">
+        </div>
+
+        <div class="fade-in delay-2">
+            <div class="sub-xv">XV Años</div>
+            <h1>Yerika</h1>
+            <div class="tagline">"Mi Noche Mágica"</div>
+        </div>
+
+        <span class="section-header fade-in delay-3">CUENTA REGRESIVA</span>
+
+        <div class="countdown-box fade-in delay-3" id="countdown">
+            <div class="timer-unit"><span class="num" id="d">00</span><span class="lab">Días</span></div>
+            <div class="timer-unit"><span class="num" id="h">00</span><span class="lab">Hrs</span></div>
+            <div class="timer-unit"><span class="num" id="m">00</span><span class="lab">Min</span></div>
+            <div class="timer-unit"><span class="num" id="s">00</span><span class="lab">Seg</span></div>
+        </div>
+
+        <span class="section-header fade-in delay-3">DETALLES DEL EVENTO</span>
+
+        <div class="info-grid fade-in delay-3">
+            <div class="info-column" style="flex: 1;">
+                <div class="info-text">
+                    SÁBADO 14 DE<br>FEBRERO 2026<br>
+                    <span class="highlight-gold" style="font-size: 1.2rem; display:block; margin-top:5px;">07:30 PM</span>
+                </div>
+            </div>
+            <div style="width: 1px; background: rgba(205, 164, 94, 0.4); margin: 0 15px;"></div>
+            <div class="info-column" style="flex: 1; text-align: right;">
+                <div class="info-text">
+                    CLUB SUCRE<br>
+                    <span style="font-size: 0.9rem;">Rubio, Táchira</span><br>
+                    <span class="highlight-gold" style="display:block; margin-top:5px;">MUNICIPIO JUNÍN</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-text fade-in delay-4" style="margin: 30px 0; font-style: italic;">
+            "Acompáñame a celebrar esta noche inolvidable..."
+        </div>
+
+        <div class="separator-h fade-in delay-4"><span>H</span></div>
+
+        <div class="digital-ticket fade-in delay-4">
+            <div style="color: var(--dorado-principal); font-family: 'Cinzel', serif; font-weight: 700; font-size: 1rem; letter-spacing: 3px; text-transform: uppercase;">PASE DIGITAL</div>
+            <div class="guest-counter" id="passCount">02 PERSONAS</div>
+        </div>
+
+        <div class="fade-in delay-4">
+            <a href="#" id="waLink" class="btn-wa-gold">
+                Confirmar Asistencia
+            </a>
+        </div>
+
+        <div class="qr-code fade-in delay-4">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=YerikaXV&color=000000&bgcolor=ffffff" alt="QR">
+        </div>
+
+    </div>
+
+    <div class="music-fab" id="musicBtn"><span id="musicIcon" style="font-size: 1.5rem;">🔇</span></div>
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const musicBtn = document.getElementById('musicBtn');
+        const musicIcon = document.getElementById('musicIcon');
+        const bgMusic = document.getElementById('bgMusic');
+        let isPlaying = false;
+
+        musicBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                bgMusic.pause(); musicIcon.innerText = "🔇"; musicBtn.classList.remove('spin-anim');
+            } else {
+                bgMusic.play().catch(e => console.log(e)); musicIcon.innerText = "🎵"; musicBtn.classList.add('spin-anim');
+            }
+            isPlaying = !isPlaying;
+        });
+
+        const params = new URLSearchParams(window.location.search);
+        const pases = params.get('p') || "2";
+        const textoPases = pases.padStart(2, '0') + (pases == 1 ? " PERSONA" : " PERSONAS");
+        document.getElementById('passCount').innerText = textoPases;
+
+        const mensajeWA = encodeURIComponent(`¡Hola Yerika! Confirmo mi asistencia para ${pases} persona(s) a tu fiesta. 💖`);
+        document.getElementById('waLink').href = `https://wa.me/584120000000?text=${mensajeWA}`;
+
+        const targetDate = new Date('Feb 14, 2026 19:30:00').getTime();
+        function updateTimer() {
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+            if (diff <= 0) {
+                document.getElementById('countdown').innerHTML = "<b style='color:var(--dorado-principal); font-size:1.8rem; font-family:Cinzel;'>¡ES HOY!</b>"; return;
+            }
+            document.getElementById('d').innerText = Math.floor(diff / 86400000);
+            document.getElementById('h').innerText = Math.floor((diff % 86400000) / 3600000);
+            document.getElementById('m').innerText = Math.floor((diff % 3600000) / 60000);
+            document.getElementById('s').innerText = Math.floor((diff % 60000) / 1000);
+        }
+        setInterval(updateTimer, 1000); updateTimer();
+    </script>
+</body>
+</html>
