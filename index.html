@@ -3,303 +3,290 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XV Yerika - Gold 24K Edition</title>
+    <title>XV Yerika - Royal Portrait Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,500&family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* --- NUEVA PALETA INTENSA --- */
-            --fondo-champagne: #f3e5ab;      /* Champagne más intenso y cálido */
-            --dorado-oscuro: #aa771c;        /* Oro viejo para sombras */
-            --dorado-medio: #d4af37;         /* Oro estándar vibrante */
-            --dorado-brillo: #fcf6ba;        /* Oro casi blanco para destellos */
-            --texto-contraste: #3b2f1e;      /* Marrón café profundo para lectura */
-            --blanco-crema: #fffdf5;
+            /* --- PALETA INTENSA (Champagne & Oro 24K) --- */
+            --fondo-champagne: #f3e5ab;      
+            --dorado-oscuro: #aa771c;        
+            --dorado-medio: #d4af37;         
+            --dorado-brillo: #fcf6ba;        
+            --texto-contraste: #3b2f1e;      
+            --blanco-glass: rgba(255, 255, 255, 0.65);
         }
 
         body {
             font-family: 'Cormorant Garamond', serif;
-            /* Fondo con más saturación */
-            background: radial-gradient(circle, var(--fondo-champagne) 0%, #decba4 100%);
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow-x: hidden;
-            font-size: 18px;
+            background: linear-gradient(135deg, #decba4 0%, var(--fondo-champagne) 50%, #decba4 100%);
+            margin: 0; display: flex; justify-content: center; min-height: 100vh; color: var(--texto-contraste);
+        }
+        body::after {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: repeating-linear-gradient(45deg, var(--dorado-medio) 0, var(--dorado-medio) 1px, transparent 0, transparent 50%);
+            background-size: 30px 30px; opacity: 0.05; pointer-events: none; z-index: 0;
         }
 
-        /* Partículas más visibles */
-        body::before {
-             content: ''; position: absolute; width: 100%; height: 100%;
-             background-image: radial-gradient(var(--dorado-medio) 2px, transparent 2px);
-             background-size: 40px 40px; opacity: 0.4; z-index: 0;
-             animation: twinkling 6s infinite alternate;
-        }
-        @keyframes twinkling { from { opacity: 0.3; transform: scale(1); } to { opacity: 0.8; transform: scale(1.1); } }
-
-        .main-card {
-            background: linear-gradient(180deg, #fffbf0 0%, var(--fondo-champagne) 100%);
-            width: 90%; max-width: 420px;
-            padding: 50px 30px;
-            border-radius: 35px;
-            /* Borde simulando marco de oro real */
-            border: 4px solid transparent;
-            border-image: linear-gradient(to right, var(--dorado-oscuro), var(--dorado-brillo), var(--dorado-oscuro)) 1;
-            box-shadow: 0 30px 80px rgba(170, 119, 28, 0.4), inset 0 0 50px rgba(212, 175, 55, 0.2);
-            text-align: center;
-            color: var(--texto-contraste);
-            position: relative;
-            z-index: 10;
-            padding-bottom: 100px;
+        .container {
+            width: 100%; max-width: 420px; background: rgba(255, 253, 245, 0.5); backdrop-filter: blur(12px);
+            box-shadow: 0 0 60px rgba(170, 119, 28, 0.35); position: relative; z-index: 10;
+            overflow: hidden; min-height: 100vh; border-left: 1px solid rgba(255,255,255,0.6); border-right: 1px solid rgba(255,255,255,0.6);
         }
 
-        /* Decoraciones de esquinas brillantes */
-        .corner-decoration {
-            position: absolute; width: 60px; height: 60px;
-            border: 3px solid var(--dorado-medio); opacity: 1;
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        /* --- MARCO RECTANGULAR FLOTANTE --- */
+        .hero-section {
+            position: relative; text-align: center; padding-top: 50px; padding-bottom: 20px;
         }
-        .top-left { top: 15px; left: 15px; border-right: none; border-bottom: none; border-radius: 15px 0 0 0; }
-        .top-right { top: 15px; right: 15px; border-left: none; border-bottom: none; border-radius: 0 15px 0 0; }
-        .bottom-left { bottom: 15px; left: 15px; border-right: none; border-top: none; border-radius: 0 0 0 15px; }
-        .bottom-right { bottom: 15px; right: 15px; border-left: none; border-top: none; border-radius: 0 0 15px 0; }
 
-        /* Animaciones */
-        .fade-in { opacity: 0; animation: fadeIn 1s ease-out forwards; }
-        .delay-1 { animation-delay: 0.3s; }
-        .delay-2 { animation-delay: 0.6s; }
-        .delay-3 { animation-delay: 0.9s; }
-        .delay-4 { animation-delay: 1.2s; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .photo-royal {
+            width: 240px; height: 340px; margin: 0 auto; position: relative;
+        }
 
-        .brand-title {
-            font-family: 'Cinzel', serif; font-weight: 900; letter-spacing: 4px;
-            /* Efecto oro metálico en texto */
-            background: linear-gradient(to bottom, var(--dorado-oscuro), var(--dorado-medio));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            font-size: 0.85rem; margin-bottom: 30px; text-transform: uppercase;
+        .photo-royal::before {
+            content: ''; position: absolute; top: 15px; left: 15px; width: 100%; height: 100%;
+            border: 2px solid var(--dorado-medio); border-radius: 20px; z-index: 0; opacity: 0.6;
         }
-        
-        .profile-frame {
-            width: 200px; height: 200px; margin: 0 auto 25px; border-radius: 50%;
-            /* Marco dorado brillante */
-            background: linear-gradient(135deg, var(--dorado-oscuro), var(--dorado-brillo), var(--dorado-oscuro));
-            padding: 6px;
-            box-shadow: 0 15px 35px rgba(170, 119, 28, 0.4);
-            animation: float 6s ease-in-out infinite;
+
+        .photo-container {
+            width: 100%; height: 100%; position: relative; z-index: 2;
+            background: linear-gradient(135deg, var(--dorado-brillo), var(--dorado-medio));
+            padding: 5px; border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(170, 119, 28, 0.4); overflow: hidden;
         }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-        
-        /* Imagen con borde interno blanco para separar del oro */
-        .profile-frame img { 
-            width: 100%; height: 100%; object-fit: cover; border-radius: 50%; 
-            object-position: center top; border: 3px solid #fff; box-sizing: border-box; 
+
+        .photo-container::after {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: linear-gradient(to right, transparent 20%, rgba(255, 255, 255, 0.8) 50%, transparent 80%);
+            transform: rotate(45deg); animation: sheen 5s infinite ease-in-out; pointer-events: none; mix-blend-mode: overlay;
+        }
+        @keyframes sheen { 0% { left: -150%; } 20% { left: 150%; } 100% { left: 150%; } }
+
+        .photo-container img {
+            width: 100%; height: 100%; object-fit: cover; border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.5); filter: contrast(1.05);
         }
 
         h1 {
             font-family: 'Great Vibes', cursive; font-size: 6rem;
-            /* GRADIENTE DE ORO REALISTA */
-            background: linear-gradient(to right, var(--dorado-oscuro) 0%, var(--dorado-brillo) 50%, var(--dorado-oscuro) 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            margin: 0; line-height: 1;
-            filter: drop-shadow(0 4px 2px rgba(0,0,0,0.1));
-            animation: shineText 5s linear infinite;
-            background-size: 200%;
+            background: linear-gradient(90deg, var(--dorado-oscuro) 0%, var(--dorado-medio) 50%, var(--dorado-oscuro) 100%);
+            background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin: 25px 0 0 0; line-height: 0.7; text-shadow: 3px 3px 0px rgba(255,255,255,0.6);
+            position: relative; z-index: 20; animation: shineText 6s linear infinite;
         }
-        @keyframes shineText { to { background-position: 200%; } }
+        @keyframes shineText { to { background-position: 200% center; } }
 
-        .sub-xv { font-family: 'Cinzel', serif; font-weight: 700; color: var(--dorado-oscuro); letter-spacing: 5px; font-size: 1rem; text-transform: uppercase; margin-top: 10px; }
-        .tagline { font-family: 'Great Vibes', cursive; font-size: 2.2rem; color: var(--dorado-medio); margin-top: 5px; margin-bottom: 40px; text-shadow: 1px 1px 0px rgba(255,255,255,0.5); }
-
-        .section-header {
-            font-family: 'Cinzel', serif; font-weight: 700; letter-spacing: 3px; color: var(--dorado-oscuro);
-            font-size: 1.2rem; text-transform: uppercase; margin: 35px 0 20px; display: block;
-            border-bottom: 2px solid var(--dorado-medio); display: inline-block; padding-bottom: 5px;
+        .subtitle {
+            font-family: 'Cinzel', serif; font-weight: 700; letter-spacing: 5px;
+            color: var(--dorado-oscuro); font-size: 0.85rem; text-transform: uppercase;
+            margin-top: -10px; margin-bottom: 30px; border-top: 1px solid var(--dorado-medio);
+            border-bottom: 1px solid var(--dorado-medio); display: inline-block; padding: 5px 15px;
         }
 
-        .info-grid {
-            display: flex; justify-content: space-between; margin-bottom: 30px;
-            text-align: left; padding: 10px 0;
+        .glass-card {
+            background: var(--blanco-glass); margin: 20px 25px; padding: 25px; border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.9); box-shadow: 0 10px 30px rgba(170, 119, 28, 0.15); text-align: center;
         }
-        .info-text { font-size: 1.15rem; line-height: 1.4; color: var(--texto-contraste); font-weight: 600; }
-        .highlight-gold { 
-            color: var(--dorado-oscuro); font-weight: 900; font-family: 'Cinzel', serif; font-size: 1rem; 
-            text-shadow: 0 1px 1px rgba(255,255,255,0.8);
+        .section-title {
+            font-family: 'Cinzel', serif; font-weight: 900; color: var(--dorado-oscuro);
+            font-size: 1.1rem; letter-spacing: 2px; text-transform: uppercase;
+            border-bottom: 2px solid var(--dorado-medio); display: inline-block; margin-bottom: 15px; padding-bottom: 5px;
         }
 
-        .countdown-box {
-            background: rgba(255, 255, 255, 0.4); border: 2px solid var(--dorado-medio);
-            border-radius: 15px; padding: 20px; display: flex; justify-content: space-around; margin: 20px 0;
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.15);
+        .countdown-row { display: flex; justify-content: space-between; gap: 8px; }
+        .circle-timer {
+            flex: 1; padding: 10px 0; border-radius: 10px;
+            background: linear-gradient(160deg, var(--dorado-medio), var(--dorado-oscuro));
+            color: white; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            box-shadow: 0 5px 15px rgba(170, 119, 28, 0.3); border: 1px solid #fff;
         }
-        .timer-unit .num { 
-            display: block; font-size: 2.5rem; 
-            /* Texto metálico en números */
+        .circle-timer .num { font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.6rem; line-height: 1; }
+        .circle-timer .label { font-size: 0.6rem; text-transform: uppercase; margin-top: 4px; opacity: 0.9; font-weight: 600; }
+
+        /* --- NUEVO ESTILO: DETALLES DE LUJO (GOLDEN BOX) --- */
+        .luxury-box {
+            border: 3px double var(--dorado-medio);
+            padding: 20px;
+            margin: 20px 25px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 15px;
+            position: relative;
+        }
+        /* Adorno superior e inferior en el borde */
+        .luxury-box::before, .luxury-box::after {
+            content: "✦"; color: var(--dorado-oscuro); font-size: 1.2rem;
+            position: absolute; left: 50%; transform: translateX(-50%);
+            background: #fffbf0; padding: 0 10px;
+        }
+        .luxury-box::before { top: -12px; }
+        .luxury-box::after { bottom: -12px; }
+
+        .lux-grid {
+            display: grid;
+            grid-template-columns: 1fr 1px 1fr; /* Izquierda - Línea - Derecha */
+            align-items: center;
+            margin-bottom: 15px;
+            gap: 10px;
+        }
+        
+        .lux-divider {
+            height: 50px;
+            background: linear-gradient(to bottom, transparent, var(--dorado-oscuro), transparent);
+        }
+
+        .lux-item { text-align: center; }
+        
+        .lux-label {
+            font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 2px;
+            color: var(--texto-contraste); display: block; margin-bottom: 5px; font-weight: 700;
+        }
+        
+        .lux-big-text {
+            font-family: 'Cinzel', serif; font-size: 1.8rem; font-weight: 900; line-height: 1;
+            /* Texto de Oro */
             background: linear-gradient(45deg, var(--dorado-oscuro), var(--dorado-medio));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            font-weight: 700; line-height: 1; margin-bottom: 5px; font-family: 'Cinzel', serif; 
         }
-        .timer-unit .lab { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--texto-contraste); font-weight: bold; }
-
-        .separator-h {
-            display: flex; align-items: center; justify-content: center; margin: 30px 0; color: var(--dorado-medio);
-        }
-        .separator-h::before, .separator-h::after { content: ''; height: 2px; background: var(--dorado-medio); flex: 1; opacity: 0.6; }
-        .separator-h span { padding: 0 15px; font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--dorado-oscuro); }
-
-        .digital-ticket {
-            border: 3px double var(--dorado-medio); background: var(--blanco-crema);
-            padding: 25px; margin: 40px 0; position: relative; border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-        }
-        .guest-counter { 
-            font-size: 2.2rem; color: var(--dorado-oscuro); font-weight: 800; margin: 15px 0; font-family: 'Cinzel', serif; 
-            text-shadow: 1px 1px 0 #fff;
+        
+        .lux-sub-text {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; 
+            color: var(--dorado-oscuro); text-transform: uppercase; letter-spacing: 1px;
+            font-weight: 600;
         }
 
-        /* Botón Dorado ULTRA Brillante */
-        .btn-wa-gold {
-            display: block; width: 100%; padding: 18px; border-radius: 50px; margin-top: 40px;
-            text-decoration: none; font-size: 0.95rem; font-weight: 800; font-family: 'Cinzel', serif;
-            text-transform: uppercase; letter-spacing: 2px; text-align: center;
-            /* Gradiente de alto contraste */
-            background: linear-gradient(45deg, var(--dorado-oscuro) 0%, var(--dorado-medio) 40%, var(--dorado-brillo) 50%, var(--dorado-medio) 60%, var(--dorado-oscuro) 100%);
-            background-size: 200%; color: #2a1e00; border: 2px solid #fff;
-            animation: goldShine 2.5s infinite linear;
-            box-shadow: 0 10px 30px rgba(170, 119, 28, 0.5); transition: transform 0.3s;
+        .lux-location {
+            border-top: 1px solid rgba(170, 119, 28, 0.2);
+            padding-top: 15px; margin-top: 10px;
         }
-        @keyframes goldShine {
-            0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; }
+        .lux-location-name {
+            font-family: 'Cinzel', serif; font-size: 1.4rem; font-weight: 700;
+            color: var(--texto-contraste); display: block; margin-bottom: 5px;
+            text-shadow: 1px 1px 0 rgba(255,255,255,0.8);
         }
-        .btn-wa-gold:active { transform: scale(0.95); }
 
-        .qr-code { margin-top: 40px; border: 4px solid var(--dorado-medio); padding: 8px; display: inline-block; background: white; border-radius: 15px; }
-        .qr-code img { width: 100px; height: 100px; display: block; }
-
-        .music-fab {
-            position: fixed; bottom: 25px; right: 25px; width: 60px; height: 60px;
-            background: linear-gradient(135deg, var(--dorado-medio), var(--dorado-oscuro)); 
-            border-radius: 50%; display: flex; justify-content: center; align-items: center;
-            box-shadow: 0 5px 20px rgba(158, 126, 69, 0.6); z-index: 1000; cursor: pointer; border: 2px solid #fff; color: #fff;
+        /* --- TICKET --- */
+        .golden-ticket {
+            background: linear-gradient(135deg, #1a1a1a 0%, #333 100%); color: var(--dorado-brillo);
+            padding: 25px; border-radius: 15px; margin: 25px; position: relative;
+            border: 1px solid var(--dorado-medio); box-shadow: 0 15px 40px rgba(0,0,0,0.3); text-align: left; overflow: hidden;
         }
-        .spin-anim { animation: spin 4s linear infinite; }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .golden-ticket::before {
+            content: ""; position: absolute; top:0; left:0; width:5px; height:100%; background: var(--dorado-medio);
+        }
+        .ticket-label { font-family: 'Cinzel', serif; font-size: 0.75rem; opacity: 0.6; letter-spacing: 2px; text-transform: uppercase;}
+        .ticket-value { font-family: 'Cinzel', serif; font-size: 1.8rem; font-weight: 700; margin: 5px 0 10px 0; background: linear-gradient(to right, #fff, var(--dorado-medio)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;}
 
+        .btn-confirm {
+            background: linear-gradient(90deg, var(--dorado-oscuro), var(--dorado-medio), var(--dorado-oscuro));
+            background-size: 200%; animation: gradientMove 3s infinite linear;
+            color: #fff; text-decoration: none; display: block;
+            margin: 30px; padding: 20px; border-radius: 50px;
+            font-family: 'Cinzel', serif; font-weight: 800; letter-spacing: 1px;
+            text-align: center; box-shadow: 0 10px 30px rgba(170, 119, 28, 0.4); border: 2px solid rgba(255,255,255,0.3);
+        }
+        .btn-confirm:active { transform: scale(0.98); }
+        @keyframes gradientMove { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
+
+        @keyframes float { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, -10px); } }
+        .fade-in { animation: fadeIn 1.2s ease forwards; opacity: 0; }
+        @keyframes fadeIn { from {opacity:0; transform:translateY(20px);} to { opacity:1; transform:translateY(0);} }
+        .music-btn {
+            position: fixed; bottom: 20px; right: 20px; width: 55px; height: 55px;
+            background: var(--dorado-oscuro); border-radius: 50%; border: 2px solid #fff;
+            display: flex; align-items: center; justify-content: center; color: white;
+            z-index: 100; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .spin { animation: spin 4s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
-    <div class="main-card">
-        <div class="corner-decoration top-left"></div>
-        <div class="corner-decoration top-right"></div>
-        <div class="corner-decoration bottom-left"></div>
-        <div class="corner-decoration bottom-right"></div>
-
-        <div class="brand-title fade-in">INVITACIÓN REAL</div>
+<div class="container">
+    
+    <div class="hero-section fade-in">
+        <div class="photo-royal">
+            <div class="photo-container">
+                <img src="quince.jpg" 
+                     alt="Yerika"
+                     onerror="this.src='quince.JPG'; this.onerror=function(){this.src='quince.png';};">
+            </div>
+        </div>
         
-        <div class="profile-frame fade-in delay-1">
-            <img src="quince.png" alt="Foto XV Yerika">
-        </div>
-
-        <div class="fade-in delay-2">
-            <div class="sub-xv">XV Años</div>
+        <div style="margin-top: 30px;">
+            <div class="subtitle">Mis Quince Años</div>
             <h1>Yerika</h1>
-            <div class="tagline">"Mi Noche Mágica"</div>
+            <p style="font-family:'Great Vibes'; font-size:1.8rem; color:var(--dorado-oscuro); margin-top:-5px;">
+                "Una noche de ensueño"
+            </p>
         </div>
-
-        <span class="section-header fade-in delay-3">CUENTA REGRESIVA</span>
-
-        <div class="countdown-box fade-in delay-3" id="countdown">
-            <div class="timer-unit"><span class="num" id="d">00</span><span class="lab">Días</span></div>
-            <div class="timer-unit"><span class="num" id="h">00</span><span class="lab">Hrs</span></div>
-            <div class="timer-unit"><span class="num" id="m">00</span><span class="lab">Min</span></div>
-            <div class="timer-unit"><span class="num" id="s">00</span><span class="lab">Seg</span></div>
-        </div>
-
-        <span class="section-header fade-in delay-3">DETALLES DEL EVENTO</span>
-
-        <div class="info-grid fade-in delay-3">
-            <div class="info-column" style="flex: 1;">
-                <div class="info-text">
-                    SÁBADO 14 DE<br>FEBRERO 2026<br>
-                    <span class="highlight-gold" style="font-size: 1.2rem; display:block; margin-top:5px;">07:30 PM</span>
-                </div>
-            </div>
-            <div style="width: 2px; background: linear-gradient(to bottom, transparent, var(--dorado-medio), transparent); margin: 0 15px;"></div>
-            <div class="info-column" style="flex: 1; text-align: right;">
-                <div class="info-text">
-                    CLUB SUCRE<br>
-                    <span style="font-size: 0.9rem;">Rubio, Táchira</span><br>
-                    <span class="highlight-gold" style="display:block; margin-top:5px;">MUNICIPIO JUNÍN</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="info-text fade-in delay-4" style="margin: 30px 0; font-style: italic;">
-            "Acompáñame a celebrar esta noche inolvidable..."
-        </div>
-
-        <div class="separator-h fade-in delay-4"><span>H</span></div>
-
-        <div class="digital-ticket fade-in delay-4">
-            <div style="color: var(--dorado-oscuro); font-family: 'Cinzel', serif; font-weight: 700; font-size: 1rem; letter-spacing: 3px; text-transform: uppercase;">PASE DIGITAL</div>
-            <div class="guest-counter" id="passCount">02 PERSONAS</div>
-        </div>
-
-        <div class="fade-in delay-4">
-            <a href="#" id="waLink" class="btn-wa-gold">
-                ✨ Confirmar Asistencia ✨
-            </a>
-        </div>
-
-        <div class="qr-code fade-in delay-4">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=YerikaXV&color=000000&bgcolor=ffffff" alt="QR">
-        </div>
-
     </div>
 
-    <div class="music-fab" id="musicBtn"><span id="musicIcon" style="font-size: 1.5rem;">🔇</span></div>
-    <audio id="bgMusic" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    </audio>
+    <div class="glass-card fade-in" style="animation-delay: 0.3s;">
+        <div class="section-title">Faltan</div>
+        <div class="countdown-row" id="countdown">
+            <div class="circle-timer"><span class="num" id="d">00</span><span class="label">Días</span></div>
+            <div class="circle-timer"><span class="num" id="h">00</span><span class="label">Hrs</span></div>
+            <div class="circle-timer"><span class="num" id="m">00</span><span class="label">Min</span></div>
+            <div class="circle-timer"><span class="num" id="s">00</span><span class="label">Seg</span></div>
+        </div>
+    </div>
 
-    <script>
-        const musicBtn = document.getElementById('musicBtn');
-        const musicIcon = document.getElementById('musicIcon');
-        const bgMusic = document.getElementById('bgMusic');
-        let isPlaying = false;
+    <div class="luxury-box fade-in" style="animation-delay: 0.5s;">
+        <div class="lux-grid">
+            <div class="lux-item">
+                <span class="lux-label">FECHA</span>
+                <span class="lux-big-text">14</span>
+                <span class="lux-sub-text">Febrero</span>
+            </div>
+            
+            <div class="lux-divider"></div> <div class="lux-item">
+                <span class="lux-label">HORA</span>
+                <span class="lux-big-text">07:30</span>
+                <span class="lux-sub-text">PM</span>
+            </div>
+        </div>
+        
+        <div class="lux-location lux-item">
+            <span class="lux-label">LUGAR DE RECEPCIÓN</span>
+            <span class="lux-location-name">Club Sucre</span>
+            <span class="text-small">Rubio, Mun. Junín</span>
+        </div>
+    </div>
 
-        musicBtn.addEventListener('click', () => {
-            if (isPlaying) {
-                bgMusic.pause(); musicIcon.innerText = "🔇"; musicBtn.classList.remove('spin-anim');
-            } else {
-                bgMusic.play().catch(e => console.log(e)); musicIcon.innerText = "🎵"; musicBtn.classList.add('spin-anim');
-            }
-            isPlaying = !isPlaying;
-        });
+    <div class="golden-ticket fade-in" style="animation-delay: 0.7s;">
+        <div class="ticket-label">Pase de Entrada</div>
+        <div class="ticket-value" id="passCount">02 PERSONAS</div>
+        <div style="font-size: 0.8rem; color: #888; margin-top:5px;">CÓDIGO VIP: YK-2026</div>
+        <div style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); opacity: 0.9;">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=70x70&data=Yerika&color=ffffff&bgcolor=000000" style="border-radius:5px;">
+        </div>
+    </div>
 
-        const params = new URLSearchParams(window.location.search);
-        const pases = params.get('p') || "2";
-        const textoPases = pases.padStart(2, '0') + (pases == 1 ? " PERSONA" : " PERSONAS");
-        document.getElementById('passCount').innerText = textoPases;
+    <a href="#" id="waLink" class="btn-confirm fade-in" style="animation-delay: 0.9s;">
+        CONFIRMAR ASISTENCIA
+    </a>
+    <div style="height: 60px;"></div>
 
-        const mensajeWA = encodeURIComponent(`¡Hola Yerika! Confirmo mi asistencia para ${pases} persona(s) a tu fiesta. 💖`);
-        document.getElementById('waLink').href = `https://wa.me/584120000000?text=${mensajeWA}`;
+</div>
 
-        const targetDate = new Date('Feb 14, 2026 19:30:00').getTime();
-        function updateTimer() {
-            const now = new Date().getTime();
-            const diff = targetDate - now;
-            if (diff <= 0) {
-                document.getElementById('countdown').innerHTML = "<b style='color:var(--dorado-oscuro); font-size:1.8rem; font-family:Cinzel;'>¡ES HOY!</b>"; return;
-            }
-            document.getElementById('d').innerText = Math.floor(diff / 86400000);
-            document.getElementById('h').innerText = Math.floor((diff % 86400000) / 3600000);
-            document.getElementById('m').innerText = Math.floor((diff % 3600000) / 60000);
-            document.getElementById('s').innerText = Math.floor((diff % 60000) / 1000);
-        }
-        setInterval(updateTimer, 1000); updateTimer();
-    </script>
+<div class="music-btn" id="musicBtn">🔇</div>
+<audio id="bgMusic" loop><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg"></audio>
+
+<script>
+    const musicBtn = document.getElementById('musicBtn'); const bgMusic = document.getElementById('bgMusic'); let playing = false;
+    musicBtn.addEventListener('click', () => { playing ? bgMusic.pause() : bgMusic.play(); musicBtn.innerText = playing ? "🔇" : "🎵"; playing ? musicBtn.classList.remove('spin') : musicBtn.classList.add('spin'); playing = !playing; });
+    
+    const params = new URLSearchParams(window.location.search); const pases = params.get('p') || "2";
+    document.getElementById('passCount').innerText = pases.padStart(2, '0') + (pases == 1 ? " PERSONA" : " PERSONAS");
+    document.getElementById('waLink').href = `https://wa.me/584120000000?text=${encodeURIComponent(`¡Hola Yerika! Confirmo mi asistencia para ${pases} persona(s). 👑`)}`;
+
+    const target = new Date('Feb 14, 2026 19:30:00').getTime();
+    setInterval(() => {
+        const now = new Date().getTime(); const diff = target - now; if(diff < 0) return;
+        document.getElementById('d').innerText = Math.floor(diff / 86400000); document.getElementById('h').innerText = Math.floor((diff % 86400000) / 3600000);
+        document.getElementById('m').innerText = Math.floor((diff % 3600000) / 60000); document.getElementById('s').innerText = Math.floor((diff % 60000) / 1000);
+    }, 1000);
+</script>
+
 </body>
 </html>
