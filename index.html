@@ -59,25 +59,22 @@
             line-height: 1.2; text-align: center;
         }
 
+        /* --- SECCIÓN FAMILIA --- */
         .family-section {
             margin: 20px 40px; padding: 15px 0; border-top: 1px solid var(--dorado-medio);
             border-bottom: 1px solid var(--dorado-medio); text-align: center;
         }
         .family-label { font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 3px; color: var(--dorado-oscuro); text-transform: uppercase; }
-        .family-name { font-family: 'Cinzel', serif; font-size: 1.7rem; font-weight: 700; color: var(--texto-contraste); display: block; margin: 5px 0; }
+        .family-name { font-family: 'Cinzel', serif; font-size: 1.5rem; font-weight: 700; color: var(--texto-contraste); display: block; margin: 5px 0; }
 
         .luxury-box {
             border: 3px double var(--dorado-medio); padding: 20px; margin: 20px 25px;
             background: rgba(255,255,255,0.7); border-radius: 15px; text-align: center;
         }
 
-        .protocol-section {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 25px;
-        }
-        .protocol-card {
-            background: rgba(255, 255, 255, 0.4); padding: 12px; border-radius: 15px;
-            border: 1px solid var(--dorado-medio); text-align: center;
-        }
+        /* --- PROTOCOLO --- */
+        .protocol-section { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 25px; }
+        .protocol-card { background: rgba(255, 255, 255, 0.4); padding: 12px; border-radius: 15px; border: 1px solid var(--dorado-medio); text-align: center; }
         .protocol-card.full-width { grid-column: span 2; }
         .protocol-card span { font-size: 1.3rem; display: block; margin-bottom: 5px; }
         .protocol-title { font-family: 'Cinzel', serif; font-size: 0.6rem; font-weight: 700; color: var(--dorado-oscuro); letter-spacing: 1px; text-transform: uppercase; }
@@ -90,36 +87,28 @@
             font-weight: 800; text-align: center; box-shadow: 0 10px 30px rgba(170, 119, 28, 0.4);
         }
 
-        /* --- BOTÓN DE MÚSICA FLOTANTE --- */
         .music-btn {
             position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px;
             background: var(--dorado-oscuro); border-radius: 50%; border: 2px solid #fff;
             display: flex; align-items: center; justify-content: center; color: white;
-            z-index: 100; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            font-size: 1.2rem;
+            z-index: 100; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.3); font-size: 1.2rem;
         }
         .spin { animation: spin 4s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
-
+        
         .fade-in { animation: fadeIn 1.2s ease forwards; opacity: 0; }
         @keyframes fadeIn { from {opacity:0; transform:translateY(20px);} to { opacity:1; transform:translateY(0);} }
     </style>
 </head>
 <body>
 
-<audio id="bgMusic" loop>
-    <source src="musica.mp3" type="audio/mpeg">
-</audio>
-
+<audio id="bgMusic" loop><source src="musica.mp3" type="audio/mpeg"></audio>
 <div class="music-btn" id="musicBtn">🔇</div>
 
 <div class="container">
-    
     <div class="hero-section fade-in">
         <div class="photo-royal">
-            <div class="photo-container">
-                <img src="quince.png" alt="Yerika">
-            </div>
+            <div class="photo-container"><img src="quince.png" alt="Yerika"></div>
         </div>
         <h1>Yerika</h1>
         <div style="font-family:'Cinzel'; letter-spacing: 5px; color: var(--dorado-oscuro); font-size: 0.8rem; margin-top: 10px;">MIS QUINCE AÑOS</div>
@@ -131,75 +120,47 @@
 
     <div class="family-section fade-in" style="animation-delay: 0.4s;">
         <span class="family-label">En compañía de mi padre</span>
-        <span class="family-name">Enrique</span>
-        <div style="font-family:'Great Vibes'; font-size: 1.6rem; color: var(--dorado-medio);">Y mi familia</div>
+        <span class="family-name">Enrique Castellanos</span>
+        <div style="font-family:'Great Vibes'; font-size: 1.6rem; color: var(--dorado-medio); margin-top: 5px;">Y mi familia</div>
+    </div>
+
+    <div class="dedicatoria fade-in" style="font-size: 1.7rem; animation-delay: 0.5s;">
+        Hay momentos en la vida que imaginamos, soñamos y esperamos... y este momento esperado ha llegado.
     </div>
 
     <div class="luxury-box fade-in" style="animation-delay: 0.6s;">
         <div style="display: flex; justify-content: space-around; align-items: center;">
-            <div>
-                <small style="letter-spacing: 2px;">FECHA</small><br>
-                <span style="font-family:'Cinzel'; font-size: 1.6rem; font-weight: 900; color: var(--dorado-oscuro);">14 FEB</span>
-            </div>
+            <div><small>FECHA</small><br><span style="font-family:'Cinzel'; font-size: 1.6rem; font-weight: 900; color: var(--dorado-oscuro);">14 FEB</span></div>
             <div style="width: 1px; height: 40px; background: var(--dorado-medio);"></div>
-            <div>
-                <small style="letter-spacing: 2px;">HORA</small><br>
-                <span style="font-family:'Cinzel'; font-size: 1.6rem; font-weight: 900; color: var(--dorado-oscuro);">08:00 PM</span>
-            </div>
+            <div><small>HORA</small><br><span style="font-family:'Cinzel'; font-size: 1.6rem; font-weight: 900; color: var(--dorado-oscuro);">08:00 PM</span></div>
         </div>
         <div style="margin-top: 15px; border-top: 1px solid rgba(170, 119, 28, 0.2); padding-top: 10px;">
-            <small style="letter-spacing: 2px;">LUGAR DE RECEPCIÓN</small><br>
+            <small>LUGAR DE RECEPCIÓN</small><br>
             <span style="font-family:'Cinzel'; font-weight: 700; font-size: 1.2rem;">CLUB SUCRE</span><br>
             <small>RUBIO, MUN. JUNÍN</small>
         </div>
     </div>
 
     <div class="protocol-section fade-in" style="animation-delay: 0.8s;">
-        <div class="protocol-card">
-            <span>✉</span>
-            <div class="protocol-title">Lluvia de Sobres</div>
-            <div class="protocol-text">Prefiero tu regalo en efectivo.</div>
-        </div>
-        <div class="protocol-card">
-            <span>👗</span>
-            <div class="protocol-title">Vestimenta</div>
-            <div class="protocol-text">Casual / Semicolonial.</div>
-        </div>
-        <div class="protocol-card full-width">
-            <span>🌙</span>
-            <div class="protocol-title">Dulces Sueños</div>
-            <div class="protocol-text">Esta noche es solo para adultos. ¡Gracias por tu comprensión!</div>
-        </div>
+        <div class="protocol-card"><span>✉</span><div class="protocol-title">Lluvia de Sobres</div><div class="protocol-text">Regalo en efectivo.</div></div>
+        <div class="protocol-card"><span>👗</span><div class="protocol-title">Vestimenta</div><div class="protocol-text">Casual / Semicolonial.</div></div>
+        <div class="protocol-card full-width"><span>🌙</span><div class="protocol-title">Dulces Sueños</div><div class="protocol-text">Evento solo para adultos.</div></div>
     </div>
 
-    <a href="https://wa.me/584162717468?text=¡Hola Yerika! Confirmo mi asistencia a tus XV años. 👑" class="btn-confirm fade-in" style="animation-delay: 1s;">
-        CONFIRMAR ASISTENCIA
-    </a>
+    <a href="https://wa.me/584162717468?text=¡Hola Yerika! Confirmo mi asistencia a tus XV años. 👑" id="waLink" class="btn-confirm fade-in" style="animation-delay: 1s;">CONFIRMAR ASISTENCIA</a>
 
-    <div style="text-align: center; font-family: 'Cinzel', serif; font-size: 0.6rem; color: var(--dorado-oscuro); margin-bottom: 30px;">
-        CONTACTO: 0416-2717468
-    </div>
-
+    <div style="height: 60px;"></div>
 </div>
 
 <script>
     const musicBtn = document.getElementById('musicBtn');
     const bgMusic = document.getElementById('bgMusic');
     let isPlaying = false;
-
     musicBtn.addEventListener('click', () => {
-        if (isPlaying) {
-            bgMusic.pause();
-            musicBtn.innerHTML = "🔇";
-            musicBtn.classList.remove('spin');
-        } else {
-            bgMusic.play().catch(e => console.log("Error al reproducir:", e));
-            musicBtn.innerHTML = "🎵";
-            musicBtn.classList.add('spin');
-        }
+        if (isPlaying) { bgMusic.pause(); musicBtn.innerHTML = "🔇"; musicBtn.classList.remove('spin'); }
+        else { bgMusic.play(); musicBtn.innerHTML = "🎵"; musicBtn.classList.add('spin'); }
         isPlaying = !isPlaying;
     });
 </script>
-
 </body>
 </html>
