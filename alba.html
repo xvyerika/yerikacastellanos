@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula Mágica de Lectoescritura</title>
+    <style>
+        body { 
+            background: url('fondo1.jpg') no-repeat center center fixed; 
+            background-size: cover; 
+            font-family: 'Comic Sans MS', cursive, sans-serif; 
+            text-align: center; margin: 0; padding: 20px; min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center; 
+        }
+        
+        #reloj { font-size: 1.2rem; background: rgba(255,255,255,0.7); padding: 5px 15px; border-radius: 10px; margin-bottom: 10px; font-weight: bold; }
+        
+        .titulo { font-size: 3.5rem; margin-bottom: 30px; display: flex; justify-content: center; flex-wrap: wrap; }
+        .titulo span { 
+            display: inline-block; animation: saltar 1s infinite alternate; background: white; 
+            border-radius: 10px; padding: 10px 20px; margin: 5px; box-shadow: 4px 4px 0px rgba(0,0,0,0.2); 
+            font-weight: bold;
+        }
+        .titulo span:nth-child(6n+1) { border: 4px solid #FF5733; color: #FF5733; }
+        .titulo span:nth-child(6n+2) { border: 4px solid #33FF57; color: #33FF57; }
+        .titulo span:nth-child(6n+3) { border: 4px solid #3357FF; color: #3357FF; }
+        .titulo span:nth-child(6n+4) { border: 4px solid #F1C40F; color: #F1C40F; }
+        .titulo span:nth-child(6n+5) { border: 4px solid #8E44AD; color: #8E44AD; }
+        .titulo span:nth-child(6n+6) { border: 4px solid #E74C3C; color: #E74C3C; }
+        @keyframes saltar { from { transform: translateY(0); } to { transform: translateY(-10px); } }
+
+        #pantalla-inicio { background: rgba(255, 255, 255, 0.9); border-radius: 20px; padding: 30px; max-width: 600px; margin: 20px auto; border: 5px solid #FF4500; }
+        .btn-entrar { padding: 15px 30px; font-size: 1.5rem; cursor: pointer; border-radius: 10px; border: none; background: #FFD700; margin-bottom: 30px; font-weight: bold; }
+        
+        #menu-principal { 
+            display: none; width: 100%; min-height: 80vh; 
+            background: url('fondo.jpg') no-repeat center center; 
+            background-size: cover; border-radius: 20px; padding: 20px;
+        }
+        .contenedor-modulos { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; padding-top: 50px; }
+        .burbuja { width: 220px; height: 220px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem; border: 8px solid white; cursor: pointer; animation: flotar 3s infinite; }
+        @keyframes flotar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        
+        #pantalla-juego { display: none; background: rgba(255,255,255,0.95); border-radius: 20px; padding: 30px; max-width: 800px; margin: auto; border: 5px solid #FF4500; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px; }
+        .carta { background: white; padding: 20px; border-radius: 15px; border: 3px solid #333; cursor: pointer; }
+        .btn-volver { padding: 10px 20px; border-radius: 10px; border: none; background: #333; color: white; cursor: pointer; }
+        
+        /* Estilos específicos */
+        .grid-trivia { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 20px; }
+        .carta-trivia { padding: 20px; border-radius: 15px; border: 3px solid #333; font-weight: bold; color: #333; }
+        .carrusel { overflow-x: auto; display: flex; gap: 20px; padding: 20px; scroll-snap-type: x mandatory; }
+        .item-cuento { min-width: 200px; height: 150px; scroll-snap-align: center; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white; cursor: pointer; padding: 10px; }
+        .pictograma-box { font-size: 2rem; background: white; padding: 15px; border-radius: 20px; margin: 10px; border: 3px solid #e83e8c; }
+    </style>
+</head>
+<body onload="actualizarReloj()">
+
+    <div id="reloj"></div>
+
+    <div id="pantalla-inicio">
+        <h1 class="titulo">
+            <span>M</span><span>I</span> <span>A</span><span>U</span><span>L</span><span>A</span> <span>M</span><span>Á</span><span>G</span><span>I</span><span>C</span><span>A</span>
+        </h1>
+        <p><strong>Alba Marina González Ramos</strong></p>
+        <p>Educación Primaria - VII Semestre</p>
+        <p>UPEL - Instituto Pedagógico Rural "Gervasio Rubio"</p>
+        <p>UC: TIC IV | Docente: MsC. Charly Sánchez</p>
+        <button class="btn-entrar" onclick="document.getElementById('pantalla-inicio').style.display='none'; document.getElementById('menu-principal').style.display='block';">¡Entrar a Jugar!</button>
+    </div>
+
+    <div id="menu-principal">
+        <div class="contenedor-modulos">
+            <div class="burbuja" style="background:#007BFF" onclick="abrirActividad('abc')">🍎 ABC</div>
+            <div class="burbuja" style="background:#FFD700; color:#333" onclick="abrirActividad('silabas')">🧩 SÍLABAS</div>
+            <div class="burbuja" style="background:#28A745" onclick="abrirActividad('letra')">🌳 LETRA PERDIDA</div>
+            <div class="burbuja" style="background:#FD7E14" onclick="abrirActividad('ques')">🚗 ¿QUÉ ES?</div>
+            <div class="burbuja" style="background:#6F42C1" onclick="abrirActividad('cuentos')">🏰 CUENTOS</div>
+            <div class="burbuja" style="background:#E83E8C" onclick="abrirActividad('pictogramas')">🖼️ PICTOGRAMAS</div>
+            <div class="burbuja" style="background:#DC3545" onclick="abrirActividad('trivia')">⭐ TRIVIA</div>
+        </div>
+    </div>
+
+    <div id="pantalla-juego">
+        <button class="btn-volver" onclick="document.getElementById('pantalla-juego').style.display='none'; document.getElementById('menu-principal').style.display='block';">⬅ Volver al Menú</button>
+        <div id="contenido-actividad"></div>
+    </div>
+
+    <script>
+        function actualizarReloj() {
+            const ahora = new Date();
+            document.getElementById('reloj').innerText = ahora.toLocaleDateString() + ' ' + ahora.toLocaleTimeString();
+            setTimeout(actualizarReloj, 1000);
+        }
+
+        const cuentosData = [
+            {t: "🐻 El Osito Valiente", c: "Había una vez un osito llamado Pipo que tenía miedo de caminar solo por el bosque. Un día, vio una mariposa de colores y decidió seguirla. Pipo caminó tanto que descubrió un jardín lleno de miel. Al final, se dio cuenta de que era valiente y volvió a casa feliz.", img: "oso.jpg", audio: "alba/oso.mp3"},
+            {t: "🌙 La Luna de Queso 🧀", c: "La luna brillaba tanto en la noche que un ratoncito curioso quiso subir a probarla, porque pensaba que era un gran trozo de queso. Construyó una escalera de piedras, pero se quedó dormido. Al despertar, vio la luna reflejada en un lago y entendió que el queso real estaba en la tierra.", img: "raton.jpg", audio: "alba/luna.mp3"},
+            {t: "🐱 La Gatita Aventurera", c: "Michi era una gatita muy curiosa que salió a explorar el jardín una mañana. Entre las flores encontró una pequeña caja de madera brillante. La abrió con su patita y encontró una colección de piedras mágicas. Michi regresó con su dueña, quien la felicitó por su gran hallazgo.", img: "gatica.jpg", audio: "alba/gatita.mp3"},
+            {t: "☀️ El Sol Alegre", c: "El sol salía cada mañana para despertar a todas las flores del jardín. Una flor pequeña no quería abrirse porque tenía frío, pero el sol le regaló un rayo tibio y especial solo para ella. La flor floreció radiante, agradecida por la calidez que recibió de su amigo el sol.", img: "jardin.jpg", audio: "alba/sol.mp3"},
+            {t: "🌳 El Árbol Sabio", c: "Había un árbol muy viejo que contaba historias a los pajaritos que descansaban en sus ramas. Les hablaba de cuando el bosque era pequeño y los ríos eran de plata. Los pajaritos siempre regresaban al atardecer para escuchar sus lecciones sobre la naturaleza y el cuidado de la tierra.", img: "arbol.jpg", audio: "alba/arbol.mp3"},
+            {t: "🐟 El Pez de Colores", c: "Un pececito vivía en un río de cristal y soñaba con conocer el mar profundo. Nadó contra la corriente hasta llegar a la orilla del océano, donde vio grandes ballenas y corales brillantes. El pececito aprendió que, aunque el río era su hogar, el mundo era un lugar lleno de maravillas por descubrir.", img: "rio.jpg", audio: "alba/pez.mp3"}
+        ];
+
+        const triviaData = [
+            {q: "¿Cuál es la primera letra del abecedario? 🔤", a: "A"}, {q: "¿Cuántas sílabas tiene 'SOL'? ☀️", a: "1"},
+            {q: "¿Qué letra falta en 'M_SA'? 🥖", a: "E"}, {q: "¿Es 'gato' un animal? 🐱", a: "SÍ"},
+            {q: "¿Qué vocal suena en 'PATO' al final? 🦆", a: "O"}, {q: "¿'CASA' empieza con C o con S? 🏠", a: "C"},
+            {q: "¿Qué animal empieza con P y ladra? 🐶", a: "PERRO"}, {q: "¿Cuántas letras tiene 'LUNA'? 🌕", a: "4"}, {q: "¿El sol es de color azul? 🔵", a: "NO"}
+        ];
+
+        function decirLetra(texto) {
+            const msg = new SpeechSynthesisUtterance(texto);
+            msg.lang = 'es-ES';
+            window.speechSynthesis.speak(msg);
+        }
+
+        function mostrarCuento(index) {
+            let cont = document.getElementById('contenido-actividad');
+            let cuento = cuentosData[index];
+            cont.innerHTML = `<h2>${cuento.t}</h2>
+                             <img src='${cuento.img}' style='width:150px; border-radius:15px; margin-bottom:10px;'>
+                             <p style='padding:20px; font-size:1.5rem; background:white; border-radius:15px; text-align:justify;'>${cuento.c}</p>
+                             <div style="margin: 20px;">
+                                <p><strong>Escucha el cuento:</strong></p>
+                                <audio controls src="${cuento.audio}"></audio>
+                             </div>
+                             <button class='btn-volver' onclick='abrirActividad("cuentos")'>⬅ Volver a los cuentos</button>`;
+        }
+
+        function abrirActividad(tipo) {
+            document.getElementById('menu-principal').style.display = 'none';
+            document.getElementById('pantalla-juego').style.display = 'block';
+            let cont = document.getElementById('contenido-actividad');
+            cont.innerHTML = "";
+            
+            if (tipo === 'abc') {
+                cont.innerHTML = "<h2>¡Toca las letras!</h2>";
+                const teclado = ["QWERTYUIOP".split(""), "ASDFGHJKL".split(""), "ZXCVBNM".split("")];
+                teclado.forEach(fila => {
+                    let f = document.createElement('div'); f.style.display="flex"; f.style.justifyContent="center"; f.style.gap="5px";
+                    fila.forEach(letra => {
+                        let btn = document.createElement('div'); btn.className='carta'; btn.innerText=letra;
+                        btn.style.backgroundColor = `hsl(${Math.random()*360}, 70%, 70%)`;
+                        btn.onclick = function() { decirLetra(letra); };
+                        f.appendChild(btn);
+                    });
+                    cont.appendChild(f);
+                });
+            } else if (tipo === 'silabas') {
+                const consonantes = ["B", "C", "D", "F", "G", "H", "J", "K", "L", "LL", "M", "N", "Ñ", "P", "Q", "R", "S", "T", "V", "W", "X", "Y", "Z"];
+                const vocales = ["A", "E", "I", "O", "U"];
+                let tablaHtml = "<table style='width:100%; border-collapse:collapse; background:white; font-size:1.2rem; cursor:pointer;'>";
+                tablaHtml += "<thead><tr><th style='background:#FFD700;'></th>" + vocales.map(v => `<th style='padding:10px; border:1px solid #ddd; background:#FFD700;'>${v}</th>`).join("") + "</tr></thead><tbody>";
+                consonantes.forEach(c => {
+                    tablaHtml += `<tr><td style='padding:10px; border:1px solid #ddd; font-weight:bold; background:#FFC8DD;'>${c}</td>`;
+                    vocales.forEach(v => {
+                        let silaba = (c === "Q" && v === "U") ? "QUE" : (c === "Q" && (v === "A" || v === "O") ? "QUA" : c + v);
+                        if(c === "Q" && (v === "E" || v === "I")) silaba = "QUI";
+                        let color = `hsl(${Math.random()*360}, 60%, 80%)`;
+                        tablaHtml += `<td style='padding:15px; border:2px solid white; background:${color}; border-radius:10px;' onclick='decirLetra("${silaba}")'>${silaba}</td>`;
+                    });
+                    tablaHtml += "</tr>";
+                });
+                cont.innerHTML = "<h2>¡Toca las sílabas!</h2>" + tablaHtml + "</table>";
+            } else if (tipo === 'letra') {
+                const ejercicios = [{d:"C_SA", a:"A", i:"casa.jpg"}, {d:"M_SA", a:"A", i:"masa.jpg"}, {d:"L_NA", a:"U", i:"luna.jpg"}, {d:"P_TO", a:"A", i:"pato.jpg"}, {d:"B_TE", a:"O", i:"bote.jpg"}, {d:"R_SA", a:"O", i:"rosa.jpg"}];
+                let idx = 0;
+                function mostrarLetra() {
+                    if (idx >= ejercicios.length) { cont.innerHTML = "<h2>¡Excelente, terminaste! 🎉</h2>"; return; }
+                    let e = ejercicios[idx];
+                    cont.innerHTML = `<h2>¿Qué letra falta?</h2><img src='${e.i}' style='width:200px; border-radius:15px; margin-bottom:10px;'><br>
+                                     <div class='carta' style='display:inline-block; font-size:3rem; padding:20px;'>${e.d}</div><br><br>
+                                     <input type='text' id='inpLetra' style='font-size:2rem; width:50px; text-align:center;'>
+                                     <button onclick='comprobar("${e.a}")' style='padding:10px 20px; font-size:1.5rem;'>OK</button>`;
+                }
+                window.comprobar = function(ans) {
+                    let val = document.getElementById('inpLetra').value.trim().toUpperCase();
+                    if(val === ans) { idx++; mostrarLetra(); }
+                    else { alert("¡Inténtalo otra vez!"); }
+                };
+                mostrarLetra();
+            } else if (tipo === 'ques') {
+                const ejercicios = [{e:"perro.jpg", n:"PERRO"}, {e:"manzana.jpg", n:"MANZANA"}, {e:"carro.jpg", n:"CARRO"}, {e:"sol.jpg", n:"SOL"}, {e:"casa.jpg", n:"CASA"}];
+                let idx = 0;
+                function mostrarPregunta() {
+                    if (idx >= ejercicios.length) { cont.innerHTML = "<h2>¡Lo lograste! 🎉</h2>"; return; }
+                    let e = ejercicios[idx];
+                    cont.innerHTML = `<h2>¿Qué es?</h2><img src='${e.e}' style='width:200px; border-radius:15px; margin-bottom:10px;'><br>
+                                     <input type='text' id='inpQ' style='font-size:2rem; width:200px; text-align:center;'>
+                                     <button onclick='comprobarQ("${e.n}")' style='padding:10px 20px; font-size:1.5rem;'>Comprobar</button>`;
+                }
+                window.comprobarQ = function(ans) {
+                    let val = document.getElementById('inpQ').value.trim().toUpperCase();
+                    if(val === ans) { idx++; mostrarPregunta(); }
+                    else { alert("¡Inténtalo otra vez!"); }
+                };
+                mostrarPregunta();
+            } else if (tipo === 'pictogramas') {
+                cont.innerHTML = `<h2>¡Lee con Pictogramas!</h2>
+                                 <div class='pictograma-box'>El 🐶 corre en el 🌳</div>
+                                 <div class='pictograma-box'>La 🐱 toma 🥛 en la 🏠</div>
+                                 <div class='pictograma-box'>El 🐟 nada en el 🌊</div>
+                                 <div class='pictograma-box'>La 🍎 es 😋 y roja</div>
+                                 <div class='pictograma-box'>El ☀️ brilla en el ☁️</div>
+                                 <div class='pictograma-box'>El 🐻 come 🍯 en el 🌳</div>`;
+            } else if (tipo === 'cuentos') {
+                cont.innerHTML = "<h2>Elige un Cuento</h2><div class='carrusel'>" + cuentosData.map((h, i) => `<div class='item-cuento' style='background:hsl(${Math.random()*360}, 70%, 60%)' onclick='mostrarCuento(${i})'><h3>${h.t}</h3></div>`).join("") + "</div>";
+            } else if (tipo === 'trivia') {
+                cont.innerHTML = "<h2>¡Trivia Mágica!</h2><div class='grid-trivia'>" + triviaData.map((t, i) => `<div class='carta-trivia' style='background:hsl(${Math.random()*360}, 70%, 80%)'><p>${t.q}</p><input type='text' id='trivia${i}'><button onclick='alert(document.getElementById("trivia"+${i}).value.trim().toUpperCase() === "${t.a}")'>Enviar</button></div>`).join("") + "</div>";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula Mágica de Lectoescritura</title>
+    <style>
+        body { background: linear-gradient(180deg, #87CEEB 0%, #E0F7FA 100%); font-family: 'Comic Sans MS', cursive, sans-serif; text-align: center; margin: 0; padding: 20px; min-height: 100vh; }
+        .titulo { font-size: 3.5rem; margin-bottom: 30px; display: flex; justify-content: center; flex-wrap: wrap; }
+        .titulo span { display: inline-block; animation: saltar 1s infinite alternate; background: white; border: 4px solid #FFD700; border-radius: 15px; padding: 5px 15px; margin: 5px; box-shadow: 3px 3px 0px rgba(0,0,0,0.2); }
+        @keyframes saltar { from { transform: translateY(0); } to { transform: translateY(-10px); } }
+
+        .contenedor-modulos { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; }
+        .burbuja { width: 220px; height: 220px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; color: white; font-weight: bold; font-size: 1.2rem; border: 8px solid white; box-shadow: 0 10px 15px rgba(0,0,0,0.1); transition: transform 0.3s; cursor: pointer; }
+        .burbuja:hover { transform: scale(1.05); }
+        .emoji { font-size: 3rem; margin-bottom: 10px; }
+
+        #pantalla-juego { display: none; background: rgba(255,255,255,0.95); border-radius: 20px; padding: 30px; max-width: 800px; margin: auto; border: 5px solid #FFD700; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px; }
+        .carta { background: white; padding: 20px; border-radius: 15px; border: 3px solid #8e44ad; cursor: pointer; transition: 0.3s; }
+        .carta:hover { background: #f3e5f5; }
+        .btn-volver { padding: 10px 20px; font-size: 1.2rem; cursor: pointer; border-radius: 10px; border: none; background: #333; color: white; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+    <h1 class="titulo">
+        <span>M</span><span>I</span> <span>A</span><span>U</span><span>L</span><span>A</span> <span>M</span><span>Á</span><span>G</span><span>I</span><span>C</span><span>A</span>
+    </h1>
+
+    <div class="contenedor-modulos">
+        <div class="burbuja abc" onclick="abrirActividad('abc')"><span class="emoji">🍎</span> ABC</div>
+        <div class="burbuja silabas" onclick="abrirActividad('silabas')"><span class="emoji">🧩</span> SÍLABAS</div>
+        <div class="burbuja letra" onclick="abrirActividad('letra')"><span class="emoji">🌳</span> LETRA PERDIDA</div>
+        <div class="burbuja ques" onclick="abrirActividad('ques')"><span class="emoji">🚗</span> ¿QUÉ ES?</div>
+        <div class="burbuja cuentos" onclick="abrirActividad('cuentos')"><span class="emoji">🏰</span> CUENTOS</div>
+        <div class="burbuja trivia" onclick="alert('Próximamente: Trivia')"><span class="emoji">⭐</span> TRIVIA</div>
+    </div>
+
+    <div id="pantalla-juego">
+        <button class="btn-volver" onclick="volverAlMenu()">⬅ Volver al Menú</button>
+        <div id="contenido-actividad"></div>
+    </div>
+
+    <script>
+        const cuentosData = [
+            {t: "El Osito Valiente", c: "Había una vez un osito que aprendió a caminar solo por el bosque. Fue muy valiente y descubrió flores mágicas.", audio: "a1.mp3"},
+            {t: "La Luna de Queso", c: "La luna brillaba tanto que un ratoncito quiso construir un cohete de cartón para subir y probarla.", audio: "a2.mp3"},
+            {t: "La Gatita Aventurera", c: "Michi salió a explorar el jardín y encontró un tesoro escondido: una pelota que rebotaba hasta las nubes.", audio: "a3.mp3"},
+            {t: "El Sol Alegre", c: "El sol salía cada mañana para despertar a todas las flores del campo con un abrazo de luz dorada.", audio: "a4.mp3"},
+            {t: "El Árbol Sabio", c: "Había un árbol muy viejo que contaba historias a los pajaritos cada tarde cuando el viento soplaba.", audio: "a5.mp3"},
+            {t: "El Pez de Colores", c: "Un pececito vivía en un río de cristal y soñaba con conocer el mar y ver las estrellas del fondo.", audio: "a6.mp3"}
+        ];
+
+        function abrirActividad(tipo) {
+            document.querySelector('.contenedor-modulos').style.display = 'none';
+            document.getElementById('pantalla-juego').style.display = 'block';
+            let contenido = document.getElementById('contenido-actividad');
+            contenido.innerHTML = ""; 
+
+            if (tipo === 'cuentos') {
+                mostrarListaCuentos();
+            } else {
+                contenido.innerHTML = "<h2>Contenido en construcción</h2>";
+            }
+        }
+
+        function mostrarListaCuentos() {
+            let contenido = document.getElementById('contenido-actividad');
+            contenido.innerHTML = "<h2>Elige un Cuento</h2><div class='grid'>" + 
+                cuentosData.map((h, i) => `<div class='carta' onclick='leerCuento(${i})'><h3>${h.t}</h3><p>Haz clic para leer</p></div>`).join("") + "</div>";
+        }
+
+        function leerCuento(index) {
+            let contenido = document.getElementById('contenido-actividad');
+            let cuento = cuentosData[index];
+            contenido.innerHTML = `<button class='btn-volver' onclick='mostrarListaCuentos()'>⬅ Volver a la lista</button>
+                                   <h2>${cuento.t}</h2>
+                                   <audio controls id="miAudio" style="width:100%; margin-bottom:20px;">
+                                       <source src="${cuento.audio}" type="audio/mpeg">
+                                       Tu navegador no soporta el audio.
+                                   </audio>
+                                   <p style='font-size:1.5rem; line-height:1.6;'>${cuento.c}</p>`;
+            
+            // Forzar carga del navegador
+            let audioPlayer = document.getElementById('miAudio');
+            audioPlayer.load();
+
+            // Activar reproducción con el primer clic del usuario
+            document.body.onclick = function() {
+                audioPlayer.play();
+                document.body.onclick = null; 
+            };
+        }
+
+        function volverAlMenu() {
+            const audio = document.querySelector('audio');
+            if (audio) { audio.pause(); audio.currentTime = 0; }
+            document.querySelector('.contenedor-modulos').style.display = 'flex';
+            document.getElementById('pantalla-juego').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
